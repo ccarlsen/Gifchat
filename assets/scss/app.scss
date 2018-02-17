@@ -1,0 +1,431 @@
+.title {
+  width: 100%;
+  height: 40px;
+  background: $primary;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  .title-logo {
+    height: 16px;
+    fill: white;
+    position: absolute;
+    top: 12px;
+    left: 20px;
+  }
+
+  .title-icons {
+    font-size: 0;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    a {
+      width: 20px;
+      height: 20px;
+      padding: 5px;
+      display: inline-block;
+      position: relative;
+      margin-left: 10px;
+    }
+    svg {
+      width: 10px;
+      fill: white;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+}
+
+.gifs {
+  width: 380px;
+  height: calc(100% - 40px);
+  background: $grey4;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gifs-trending,
+  .gifs-favourites,
+  .gifs-results,
+  .gifs-loading {
+    display: none;
+  }
+
+  .gifs-trending {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 20px 110px 20px;
+    figure {
+      width: calc(50% - 5px);
+      height: 70px;
+      background: $grey3;
+      margin-bottom: 10px;
+      border-radius: $radius;
+      position: relative;
+      overflow: hidden;
+      &:nth-last-of-type(-n+2) {
+        margin-bottom: 0;
+      }
+      &:after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgba(black, 0.8) 0%,rgba(black, 0.2) 100%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+      img {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+      }
+      figcaption {
+        font-size: 12px;
+        color: white;
+        font-weight: 700;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+      }
+    }
+  }
+
+  .gifs-favourites,
+  .gifs-results {
+    padding: 20px 20px 110px 20px;
+    column-count: 3;
+    column-gap: 6px;
+    figure {
+      background: $grey3;
+      border-radius: $radius;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+  }
+
+  .gifs-loading {
+    width: 100%;
+    height: calc(100% - 90px);
+    background: $grey4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    &:after {
+      content: "Loading GIFs...";
+      font-size: 25px;
+      opacity: 0.5;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .gifs-form {
+    width: 380px;
+    height: 90px;
+    background: white;
+    padding: 20px 20px 30px 20px;
+    border-right: 2px solid $grey4;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+
+    .gifs-form-search {
+      width: 240px;
+      position: relative;
+      input {
+        padding-left: 30px;
+      }
+      label {
+        position: absolute;
+        svg {
+          fill: $grey2;
+        }
+        &:nth-of-type(1) {
+          top: 13px;
+          left: 10px;
+          svg {
+            width: 14px;
+          }
+        }
+        &:nth-of-type(2) {
+          top: 12px;
+          left: 10px;
+          display: none;
+          svg {
+            width: 10px;
+          }
+        }
+      }
+    }
+
+    .gifs-form-buttons {
+      width: 80px;
+      height: 40px;
+      display: flex;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      .gifs-form-button-trending,
+      .gifs-form-button-favourites {
+        width: 50%;
+        border: 1px solid $grey3;
+        position: relative;
+        &:nth-of-type(1) {
+          border-top-left-radius: $radius;
+          border-bottom-left-radius: $radius;
+        }
+        &:nth-of-type(2) {
+          border-left: none;
+          border-top-right-radius: $radius;
+          border-bottom-right-radius: $radius;
+        }
+        svg {
+          height: 14px;
+          fill: $grey2;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+
+  }
+
+  &.show-gifs-trending {
+    .gifs-trending {
+      display: flex;
+    }
+    .gifs-form {
+      .gifs-form-buttons {
+        .gifs-form-button-trending {
+          svg {
+            fill: $primary;
+          }
+        }
+      }
+    }
+  }
+
+  &.show-gifs-favourites {
+    .gifs-favourites {
+      display: block;
+    }
+    .gifs-form {
+      .gifs-form-buttons {
+        .gifs-form-button-favourites {
+          svg {
+            fill: $primary;
+          }
+        }
+      }
+    }
+  }
+
+  &.show-gifs-results {
+    .gifs-results {
+      display: block;
+    }
+    .gifs-form {
+      .gifs-form-search {
+        label {
+          &:nth-of-type(1) {
+            display: none;
+          }
+          &:nth-of-type(2) {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  &.show-gifs-loading {
+    .gifs-loading {
+      display: block;
+    }
+    .gifs-form {
+      .gifs-form-search {
+        label {
+          &:nth-of-type(1) {
+            display: none;
+          }
+          &:nth-of-type(2) {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+.chat {
+  width: calc(100% - 380px);
+  height: calc(100% - 40px);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  .chat-messages {
+    width: 100%;
+    height: calc(100% - 70px);
+    padding-top: 30px;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    &::-webkit-scrollbar {
+      width: 16px;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 10px 10px $grey4;
+      border: solid 4px transparent;
+      border-radius: 16px;
+    }
+    &::-webkit-scrollbar-thumb {
+      box-shadow: inset 0 0 10px 10px $grey3;
+      border: solid 4px transparent;
+      border-radius: 16px;
+    }
+
+    .message {
+      margin-bottom: 10px;
+      .message-first,
+      .message-append {
+        display: flex;
+        padding: 5px 20px 5px 0;
+        div:nth-child(1) {
+          width: 70px;
+          margin-right: 10px;
+          text-align: right;
+        }
+      }
+      .message-append {
+        time {
+          opacity: 0;
+        }
+        &:hover {
+          time {
+            opacity: 1;
+          }
+        }
+      }
+      img {
+        width: 36px;
+        height: 36px;
+        border-radius: 100%;
+        float: right;
+      }
+      time {
+        font-size: 12px;
+        color: $grey2;
+      }
+      strong {
+        font-weight: 700;
+        margin-right: 6px;
+      }
+      h5 {
+        margin-top: 1px;
+        margin-bottom: 5px;
+      }
+      video {
+        border-radius: $radius;
+      }
+    }
+
+  }
+
+  .chat-users {
+    width: 180px;
+    background: rgba(white, 0.9);
+    padding: 30px 30px 15px 15px;
+    border-bottom-left-radius: $radius;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    right: 16px;
+    > div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      > div:nth-child(1) {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        img {
+          border-radius: 100%;
+        }
+        &:after {
+          content: "";
+          width: 16px;
+          height: 16px;
+          border: 2px solid white;
+          border-radius: 100%;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+        }
+        &[data-status="online"] {
+          &:after {
+            background: $primary;
+          }
+        }
+        &[data-status="offline"] {
+          &:after {
+            background: $grey3;
+          }
+        }
+      }
+      > div:nth-child(2) {
+        margin-left: 5px;
+        strong, small {
+          display: block;
+        }
+        strong {
+          font-weight: 700;
+          margin-bottom: 2px;
+        }
+        small {
+          font-size: 12px;
+          color: $grey2;
+        }
+      }
+    }
+  }
+
+  .chat-form {
+    width: 100%;
+    height: 70px;
+    padding: 0 30px;
+    background: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    .chat-form-typing {
+      display: none;
+      margin-top: 5px;
+      font-size: 12px;
+      color: $grey2;
+    }
+  }
+
+}

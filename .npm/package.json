@@ -1,0 +1,17 @@
+{
+  "name": "Gifchat",
+  "version": "1.0.0",
+  "description": "Yet another instant messenger",
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ccarlsen/Gifchat.git"
+  },
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "browser-sync": "^2.23.3",
+    "gulp": "^3.9.1",
+    "gulp-ruby-sass": "^3.0.0"
+  }
+}
